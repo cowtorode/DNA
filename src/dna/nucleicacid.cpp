@@ -2,10 +2,9 @@
 // Name: nucleicacid.cpp
 // Author: Cory Torode
 // Date: 11/8/23
-// Description: Stores DNA compressedNucleotides compactly
+// Description: Stores DNA nucleotides compactly
 //
 
-#include <cmath>
 #include "nucleicacid.h"
 #include "../util/stringutil.h"
 
