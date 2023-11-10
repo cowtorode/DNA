@@ -19,26 +19,32 @@ private:
      * 0b11 == T or U, (depending on if RNA or DNA)
      * Notice, A == ~T, C == ~G. This allows for easy computation of strand complements.
      */
-    std::string nucleotides;
+    std::string compressedNucleotides;
 
     int basePairs; // number of base pairs, size of input sequence...
 
     std::string compressSequence(std::string sequence);
 public:
     /*
-     * Expects the 5' to 3' sequence of DNA nucleotides
+     * Expects the 3' to 5' sequence of DNA nucleotides
      */
     explicit NucleicAcid(const std::string& sequence);
 
-    std::string getComplementingNucleotides();
+    /*
+     * Computes the compressed complement of 35 and returns it.
+     */
+    std::string getCompressed53();
 
-    inline std::string getNucleotides() const { return nucleotides; }
+    /*
+     * Returns the compressed 35 sequence.
+     */
+    inline std::string getCompressed35() const { return compressedNucleotides; }
 
-    std::string getSequence();
+    std::string getDecompressed35();
 
     /*
      * Returns the number of base pairs.
-     * See NucleicAcid::getNucleotides to get the actual bases.
+     * See NucleicAcid::getCompressed35 to get the actual bases.
      */
     inline int getBasePairs() const { return basePairs; }
 };
