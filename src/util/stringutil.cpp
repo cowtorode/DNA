@@ -37,10 +37,10 @@ StringUtil::StringBuilder::StringBuilder(unsigned long length) : building(length
 
 void StringUtil::StringBuilder::append(const std::string &s) {
     for (char c : s) {
-        building[firstNull++] = c;
+        append(c);
     }
 }
 
-void StringUtil::StringBuilder::append(char c) {
+void StringUtil::StringBuilder::append(const char &c) {
     building[firstNull++] = c;
 }

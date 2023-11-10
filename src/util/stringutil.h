@@ -28,7 +28,7 @@ public:
 
         void append(const std::string &s);
 
-        void append(char c);
+        inline void append(const char &c);
 
         inline std::string get() { return building; }
     };
