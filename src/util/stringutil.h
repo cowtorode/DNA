@@ -26,7 +26,7 @@ public:
     public:
         explicit StringBuilder(unsigned long length);
 
-        void append(std::string s);
+        void append(const std::string &s);
 
         void append(char c);
 

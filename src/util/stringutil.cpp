@@ -35,12 +35,10 @@ StringUtil::StringBuilder::StringBuilder(unsigned long length) : building(length
                                                                  firstNull(0) {
 }
 
-void StringUtil::StringBuilder::append(std::string s) {
-    unsigned long length = s.length();
-    for (unsigned long i = firstNull; i < firstNull + length; i++) {
-        building[i] = s[length - i];
+void StringUtil::StringBuilder::append(const std::string &s) {
+    for (char c : s) {
+        building[firstNull++] = c;
     }
-    firstNull += length;
 }
 
 void StringUtil::StringBuilder::append(char c) {
