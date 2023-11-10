@@ -33,14 +33,14 @@ public:
     /*
      * Computes the compressed complement of 35 and returns it.
      */
-    std::string getCompressed53();
+    std::string getCompressed53() const;
 
     /*
      * Returns the compressed 35 sequence.
      */
     inline std::string getCompressed35() const { return compressedNucleotides; }
 
-    std::string getDecompressed35();
+    std::string getDecompressed35() const;
 
     /*
      * Returns the number of base pairs.

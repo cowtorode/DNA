@@ -16,10 +16,10 @@ std::string StringUtil::toUpper(std::string s) {
 }
 
 std::string StringUtil::toBinaryString(const std::string &s) {
-    // create new string of the final size
+    // create new building of the final size
     std::string result(s.length() * 8, '\0');
 
-    // iterate through each character of the string
+    // iterate through each character of the building
     for (int i = 0; i < s.length(); i++) {
         char curr = s[i];
         // checks bit by bit the 1s and 0s of the char
@@ -29,4 +29,20 @@ std::string StringUtil::toBinaryString(const std::string &s) {
         }
     }
     return result;
+}
+
+StringUtil::StringBuilder::StringBuilder(unsigned long length) : building(length, '\0'),
+                                                                 firstNull(0) {
+}
+
+void StringUtil::StringBuilder::append(std::string s) {
+    unsigned long length = s.length();
+    for (unsigned long i = firstNull; i < firstNull + length; i++) {
+        building[i] = s[length - i];
+    }
+    firstNull += length;
+}
+
+void StringUtil::StringBuilder::append(char c) {
+    building[firstNull++] = c;
 }

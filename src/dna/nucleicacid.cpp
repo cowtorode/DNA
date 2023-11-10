@@ -5,6 +5,7 @@
 // Description: Stores DNA compressedNucleotides compactly
 //
 
+#include <cmath>
 #include "nucleicacid.h"
 #include "../util/stringutil.h"
 
@@ -14,10 +15,10 @@ NucleicAcid::NucleicAcid(const std::string& sequence) : compressedNucleotides(co
 
 std::string NucleicAcid::compressSequence(std::string sequence) {
     StringUtil::toUpperReference(sequence);
-    std::string genome;
+    StringUtil::StringBuilder compressed(sequence.length() / 4 + 1);
 
     // chars are 16 bits so with 2 bits per nucleotide we can store 8 compressedNucleotides per char
-    char append = 0;  // buffer of 8 compressedNucleotides before added to resulting string
+    char append = 0;  // buffer of 8 compressedNucleotides before added to resulting building
     char offset = 6; // amount to bitshift to find position of current nucleotide in iteration
     bool y;
 
@@ -53,18 +54,18 @@ std::string NucleicAcid::compressSequence(std::string sequence) {
         // handle 8 bit char running out of bits
         if (offset == 0) {
             offset = 6;
-            genome += append;
+            compressed.append(append);
             append = 0;
         } else {
             offset -= 2;
         }
     }
     // add last character... (some of this may be cut off depending on base pairs)
-    genome += append;
-    return genome;
+    compressed.append(append);
+    return compressed.get();
 }
 
-std::string NucleicAcid::getCompressed53() {
+std::string NucleicAcid::getCompressed53() const {
     std::string complement = compressedNucleotides;
 
     for (int i = 0; i < compressedNucleotides.size(); i++) {
@@ -74,7 +75,7 @@ std::string NucleicAcid::getCompressed53() {
     return complement;
 }
 
-std::string NucleicAcid::getDecompressed35() {
+std::string NucleicAcid::getDecompressed35() const {
     // instantiate sequence with final size
     std::string sequence(compressedNucleotides.size() * 4, '\0');
     char curr;

@@ -2,12 +2,18 @@
 #include "dna/nucleicacid.h"
 #include "util/stringutil.h"
 
-int main() {
-    std::string sequence = "tacatcgat";
+using std::string;
+using std::cout;
+using std::endl;
 
-    NucleicAcid dna(sequence);
-    std::cout << "Binary Nucleotides " << StringUtil::toBinaryString(dna.getCompressed35()) << std::endl;
-    std::cout << "Complement Binary Nucleotides " << StringUtil::toBinaryString(dna.getCompressed53()) << std::endl;
-    std::cout << "Sequence " << dna.getDecompressed35() << std::endl;
+void printDNAInfo(const NucleicAcid &dna) {
+    cout << "Binary Nucleotides " << StringUtil::toBinaryString(dna.getCompressed35()) << endl;
+    cout << "Complement Binary Nucleotides " << StringUtil::toBinaryString(dna.getCompressed53()) << endl;
+    cout << "Sequence " << dna.getDecompressed35() << endl;
+}
+
+int main() {
+    NucleicAcid dna("atcgaaaa");
+    printDNAInfo(dna);
     return 0;
 }
