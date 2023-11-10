@@ -1,5 +1,9 @@
 //
-// Created by cory on 11/8/23.
+// Name: stringutil.cpp
+// Author: Cory Torode
+// Date: 11/8/23
+// Description: Implements some std::string utilities, such sa toUpper, toBinaryString,
+//              and a StringBuilder that avoids std::string resizing and reallocation.
 //
 
 #include "stringutil.h"
@@ -35,6 +39,7 @@ StringUtil::StringBuilder::StringBuilder(unsigned long length) : building(length
                                                                  firstNull(0) {
 }
 
+// fixme: potential issue if append above initial length
 void StringUtil::StringBuilder::append(const std::string &s) {
     for (char c : s) {
         append(c);

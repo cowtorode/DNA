@@ -1,3 +1,10 @@
+//
+// Name: main.cpp
+// Author: Cory Torode
+// Date: 11/8/23
+// Description: Start point for digital DNA compression testing
+//
+
 #include <iostream>
 #include "dna/nucleicacid.h"
 #include "util/stringutil.h"
@@ -13,7 +20,8 @@ void printDNAInfo(const NucleicAcid &dna) {
 }
 
 int main() {
-    NucleicAcid dna("atcgaaaa");
+    string sequence = "atcg";
+    NucleicAcid dna(sequence);
     printDNAInfo(dna);
     return 0;
 }

@@ -1,5 +1,7 @@
 //
-// Created by cory on 11/8/23.
+// Name: stringutil.h
+// Author: Cory Torode
+// Date: 11/8/23
 //
 
 #ifndef DNA_STRINGUTIL_H

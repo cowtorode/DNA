@@ -12,14 +12,15 @@ NucleicAcid::NucleicAcid(const std::string& sequence) : compressedNucleotides(co
                                                         basePairs(sequence.length()) {
 }
 
+// fixme: check if valid nucleotide before compression
 std::string NucleicAcid::compressSequence(std::string sequence) {
     StringUtil::toUpperReference(sequence);
     StringUtil::StringBuilder compressed(sequence.length() / 4 + 1);
 
     // chars are 16 bits so with 2 bits per nucleotide we can store 8 compressedNucleotides per char
-    char append = 0;  // buffer of 8 compressedNucleotides before added to resulting building
+    char append = 0; // buffer of 8 compressedNucleotides before added to resulting building
     char offset = 6; // amount to bitshift to find position of current nucleotide in iteration
-    bool y;
+    bool y;          // 3rd bit of current char, (5th and 2nd bits are also calculated)
 
     // 'A' == 0b01000001
     // 'C' == 0b01000011
@@ -38,18 +39,16 @@ std::string NucleicAcid::compressSequence(std::string sequence) {
     // A   | C   | G   | T
     // 0 0 | 0 1 | 1 0 | 1 1
     // First bit = x0 | y0
-    // Second bit = y xnor z
+    // Second bit = y ^ z
     // 0b00 == A
     // 0b01 == C
     // 0b10 == G
     // 0b11 == T
     for (char c : sequence) {
-        // get 2nd 3rd and 5th bits for calculating nucleotide bit
-        // bool x = (c & 0b00010000) != 0; // 5th bit
-        y = (c & 0b00000100) != 0; // 3rd bit
-        // bool z = (c & 0b00000010) != 0; // 2nd bit
-        append |= (((c & 0b00010000) != 0) | y) << (offset + 1);
-        append |= (y ^ ((c & 0b00000010) != 0)) << offset;
+        // get 2nd 3rd and 5th bits for calculating bit corresponding to nucleotide
+        y = (c & 0b100) != 0; // calculate 3rd bit
+        append |= (y | ((c & 0b10000) != 0) /* 5th bit */) << (offset + 1);
+        append |= (y ^ ((c & 0b00010) != 0) /* 2nd bit */) << offset;
         // handle 8 bit char running out of bits
         if (offset == 0) {
             offset = 6;
