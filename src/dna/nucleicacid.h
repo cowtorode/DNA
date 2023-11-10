@@ -26,7 +26,8 @@ private:
     std::string compressSequence(std::string sequence);
 public:
     /*
-     * Expects the 3' to 5' sequence of DNA nucleotides
+     * Converts an std::string input of 3' to 5' nucleotides, each character being either
+     * 'A', 'C', 'T', 'G', into a more compressed format stored as a string.
      */
     explicit NucleicAcid(const std::string& sequence);
 
