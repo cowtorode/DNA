@@ -20,8 +20,7 @@ void printDNAInfo(const NucleicAcid &dna) {
 }
 
 int main() {
-    string sequence = "atcg";
-    NucleicAcid dna(sequence);
+    NucleicAcid dna("tactcggcatatttt");
     printDNAInfo(dna);
     return 0;
 }

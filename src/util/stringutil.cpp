@@ -2,8 +2,7 @@
 // Name: stringutil.cpp
 // Author: Cory Torode
 // Date: 11/8/23
-// Description: Implements some std::string utilities, such sa toUpper, toBinaryString,
-//              and a StringBuilder that avoids std::string resizing and reallocation.
+// Description: Implements some std::string utilities, such as toUpper, and toBinaryString.
 //
 
 #include "stringutil.h"
@@ -33,19 +32,4 @@ std::string StringUtil::toBinaryString(const std::string &s) {
         }
     }
     return result;
-}
-
-StringUtil::StringBuilder::StringBuilder(unsigned long length) : building(length, '\0'),
-                                                                 firstNull(0) {
-}
-
-// fixme: potential issue if append above initial length
-void StringUtil::StringBuilder::append(const std::string &s) {
-    for (char c : s) {
-        append(c);
-    }
-}
-
-void StringUtil::StringBuilder::append(const char &c) {
-    building[firstNull++] = c;
 }

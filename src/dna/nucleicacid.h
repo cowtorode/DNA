@@ -45,7 +45,7 @@ public:
 
     /*
      * Returns the number of base pairs.
-     * See NucleicAcid::getCompressed35 to get the actual bases.
+     * See NucleicAcid::getCompressed35 to getStored the actual bases.
      */
     inline int getBasePairs() const { return basePairs; }
 };
