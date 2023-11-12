@@ -32,16 +32,30 @@ public:
     explicit NucleicAcid(const std::string& sequence);
 
     /*
-     * Computes the compressed complement of 35 and returns it.
+     * Computes the compressed 5' -> 3' strand and returns it.
      */
     std::string getCompressed53() const;
 
     /*
-     * Returns the compressed 35 sequence.
+     * Returns the compressed 3' -> 5' sequence.
      */
     inline std::string getCompressed35() const { return compressedNucleotides; }
 
-    std::string getDecompressed35() const;
+    std::string decompress(std::string compressed) const;
+
+    /*
+     * Returns the 5' -> 3' sequence of nucleotides in a human-readable format.
+     */
+    inline std::string getDecompressed53() const {
+        return decompress(getCompressed53());
+    }
+
+    /*
+     * Returns the 3' -> 5' sequence of nucleotides in a human-readable format.
+     */
+    inline std::string getDecompressed35() const {
+        return decompress(compressedNucleotides);
+    }
 
     /*
      * Returns the number of base pairs.
