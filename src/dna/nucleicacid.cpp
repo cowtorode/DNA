@@ -13,7 +13,6 @@ NucleicAcid::NucleicAcid(const std::string& sequence) : compressedNucleotides(co
                                                         basePairs(sequence.length()) {
 }
 
-// fixme: check if valid nucleotide before compression
 std::string NucleicAcid::compressSequence(std::string sequence) {
     StringUtil::toUpperReference(sequence);
     std::string compressed;
@@ -80,18 +79,18 @@ std::string NucleicAcid::getCompressed53() const {
     return complement;
 }
 
-std::string NucleicAcid::getDecompressed35() const {
+std::string NucleicAcid::decompress(std::string compressed) const {
     // instantiate sequence with final size
-    std::string sequence(compressedNucleotides.size() * 4, '\0');
+    std::string sequence(compressed.size() * 4, '\0');
     char curr;
     int offset;
     bool odd;
 
     // for each char
-    for (int i = 0; i < compressedNucleotides.size(); i++) {
-        curr = compressedNucleotides[i];
+    for (int i = 0; i < compressed.size(); i++) {
+        curr = compressed[i];
 
-        for (int j = 0; j < 4 /* 4 compressedNucleotides per char */; j++) {
+        for (int j = 0; j < 4 /* 4 compressed per char */; j++) {
             // curr = 0b00110110 ATCG
             // j == 0, look at 0 and 1 bit. curr & 0b10000000, curr & 0b01000000
             // j == 1, look at 2 and 3 bit. curr & 0b00100000, curr & 0b00010000
