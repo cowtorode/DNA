@@ -16,6 +16,10 @@ public:
     static std::string toUpper(std::string s);
 
     static std::string toBinaryString(const std::string &s);
+
+    static void replaceReference(std::string &s, char from, char to);
+
+    static std::string replace(std::string s, char from, char to);
 };
 
 

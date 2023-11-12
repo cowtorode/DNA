@@ -33,3 +33,18 @@ std::string StringUtil::toBinaryString(const std::string &s) {
     }
     return result;
 }
+
+void StringUtil::replaceReference(std::string &s, char from, char to) {
+    for (char &c : s) {
+        if (c == from) {
+            c = to;
+        }
+    }
+}
+
+std::string StringUtil::replace(std::string s, char from, char to) {
+    replaceReference(s, from, to);
+    return s;
+}
+
+
